@@ -44,8 +44,8 @@ public class Car {
                 return name;
         }
 
-        public int getCurrentPosition() {
-                return currentPosition.getPosition();
+        public Position currentPosition() {
+                return currentPosition;
         }
 
 }

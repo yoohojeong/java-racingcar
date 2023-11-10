@@ -14,17 +14,19 @@ class RacingCarGameTest {
     @Test
     void 입력한_자동차_이름_갯수만큼_해당_이름을_가진_자동차_생성() {
         String carNamesInOneText = "aaaaa, bbbbb, ccccc, ddddd, eeeee";
+        int round = 5;
         String[] carNames = TextManipulator.splitTextByComma(carNamesInOneText);
-        RacingCarGame game = new RacingCarGame(carNames);
-        assertThat(game.joinCars()).hasSize(carNames.length);
+        RacingCarGame game = new RacingCarGame(round, carNames);
+        assertThat(game.cars()).hasSize(carNames.length);
     }
 
     @Test
     void 자동차_이름이_5자를_초과할_경우_에러() {
         String carNamesInOneText = "aaaaaa";
+        int round = 5;
         String[] carNames = TextManipulator.splitTextByComma(carNamesInOneText);
-        RacingCarGame game = new RacingCarGame(carNames);
-        assertThatThrownBy(game::joinCars).isInstanceOf(IllegalArgumentException.class);
+        RacingCarGame game = new RacingCarGame(round, carNames);
+        assertThatThrownBy().isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -43,9 +45,15 @@ class RacingCarGameTest {
     @Test
     void 자동차_경주_1라운드_정상_실행(){
         String carNamesInOneText = "aaaaa, bbbbb, ccccc, ddddd, eeeee";
+        int round = 5;
         String[] carNames = TextManipulator.splitTextByComma(carNamesInOneText);
-        RacingCarGame game = new RacingCarGame(carNames);
-        assertThatCode(()->game.moveOneRound(game.joinCars())).doesNotThrowAnyException();
+        RacingCarGame game = new RacingCarGame(round, carNames);
+        assertThatCode(()->game.moveOneRound()).doesNotThrowAnyException();
+    }
+
+    @Test
+    void 우승자_찾기(){
+
     }
 
 }

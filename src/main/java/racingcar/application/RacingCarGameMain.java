@@ -18,15 +18,15 @@ public class RacingCarGameMain {
                 int round = inputValue.getRound();
                 String[] carNames = TextManipulator.splitTextByComma(carNamesInOneText);
 
-                RacingCarGame game = new RacingCarGame(carNames);
-                List<Car> cars = game.joinCars();
+                RacingCarGame game = new RacingCarGame(round, carNames);
+                while (game.isOngoing()) {
+                        game.moveOneRound();
+                        ResultView.printPositionForAllCarsInCurrentRound(game.cars());
+                }
+//                List<Car> cars = game.joinCars();
 
                 ResultView.printResultViewTitle();
-                ResultView.printPositionForAllCarsInCurrentRound(cars);
-                IntStream.range(0, round).forEach(thisRound -> {
-                        game.moveOneRound(cars);
-                        ResultView.printPositionForAllCarsInCurrentRound(cars);
-                });
-                ResultView.printWinner(game.findWinners(cars));
+                ResultView.printPositionForAllCarsInCurrentRound(game.cars());
+                ResultView.printWinner(game.findWinners());
         }
 }
